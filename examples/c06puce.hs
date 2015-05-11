@@ -22,7 +22,7 @@ fi = fromIntegral
 
 parseBounds :: IO (Int64, Int64)
 parseBounds = do
-  (m, n) <- C.withPtr $ \m -> C.withPtr_ $ \n ->
+  (m, n) <- C.withPtrs_ $ \(m, n) ->
     [C.exp| void{ scanf("%*[^\n] %ld%ld%*[^\n]", $(long *m), $(long *n)) } |]
   return (fi m, fi n)
 

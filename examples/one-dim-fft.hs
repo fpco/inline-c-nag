@@ -2,6 +2,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 import qualified Language.C.Inline.Nag as C
 import qualified Data.Vector.Storable as V
+import           Foreign.C.Types
 
 -- Set the 'Context' to the one provided by "Language.C.Inline.Nag".
 -- This gives us access to NAG types such as 'C.Complex' and 'C.NagError',

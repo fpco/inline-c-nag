@@ -77,7 +77,7 @@ oneVar
   -> Either String (CDouble, CDouble)
 oneVar (a, b) fun max_fun = unsafePerformIO $ do
     let funct xc fc _comm = poke fc $ fun xc
-    C.withNagError $ \fail_ -> C.withPtr $ \x -> C.withPtr_ $ \f -> do
+    C.withNagError $ \fail_ -> C.withPtrs_ $ \(x, f) -> do
       [C.stmts| void {
         double a = $(double a), b = $(double b);
         nag_opt_one_var_no_deriv(
