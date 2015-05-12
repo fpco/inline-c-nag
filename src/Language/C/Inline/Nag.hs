@@ -4,6 +4,12 @@
 {-# LANGUAGE RecordWildCards #-}
 module Language.C.Inline.Nag
   ( module Language.C.Inline
+    -- * Context
+  , nagCtx
+    -- * Utilities
+  , withNagError
+  , initNagError
+  , checkNagError
     -- * Types
   , Complex(..)
   , NagError
@@ -11,12 +17,6 @@ module Language.C.Inline.Nag
   , Nag_Integer
   , Nag_Comm
   , Nag_User
-    -- * Context
-  , nagCtx
-    -- * Utilities
-  , withNagError
-  , initNagError
-  , checkNagError
   ) where
 
 import           Prelude hiding (exp)
@@ -40,11 +40,14 @@ include "<nag.h>"
 withNagError :: (Ptr NagError -> IO a) -> IO (Either String a)
 withNagError f = initNagError $ \ptr -> checkNagError ptr $ f ptr
 
+-- | Like 'withNagError', but with no error check.
 initNagError :: (Ptr NagError -> IO a) -> IO a
 initNagError f = alloca $ \ptr -> do
   [exp| void{ INIT_FAIL(*$(NagError *ptr)) } |]
   f ptr
 
+-- | Runs the provided actoin, and checks if the 'NagError' reports
+-- an error.
 checkNagError :: Ptr NagError -> IO a -> IO (Either String a)
 checkNagError ptr f = do
   x <- f

@@ -6,6 +6,7 @@ module Language.C.Inline.Nag.Internal
   ( -- * Types
     Complex(..)
   , NagError
+  , _NE_NOERROR
   , Nag_Boolean
   , Nag_ErrorControl
   , Nag_Integer
@@ -15,8 +16,6 @@ module Language.C.Inline.Nag.Internal
   , nagCtx
   ) where
 
-import           Control.Applicative ((<*>))
-import           Data.Functor ((<$>))
 import qualified Data.Map as Map
 import           Data.Monoid ((<>), mempty)
 import           Foreign.C.Types
@@ -55,6 +54,10 @@ instance Storable NagError where
     alignment _ = alignment (undefined :: Ptr ())
     peek = error "peek not implemented for NagError"
     poke _ _ = error "poke not implemented for NagError"
+
+-- | Code indicating no errors (usually in a 'NagError' structure)
+_NE_NOERROR :: CInt
+_NE_NOERROR = (#const NE_NOERROR)
 
 data Nag_Comm
 instance Storable Nag_Comm where
