@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fpco/inline-c-nag.svg)](https://travis-ci.org/fpco/inline-c-nag)
+
 # Using `inline-c` with NAG
 
 This package a `C.Context` and various utilities which make it easy to

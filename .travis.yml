@@ -15,6 +15,10 @@ install:
   - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
   - travis_retry cabal update
   - cabal install --only-dependencies --enable-tests --enable-benchmarks
+  - git clone https://github.com/fpco/inline-c.git;
+    cd inline-c;
+    cabal install;
+    cd ..;
 
 script:
   - cabal configure -flib-Werror -v2 --enable-tests --enable-benchmarks
