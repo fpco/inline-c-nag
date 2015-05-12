@@ -9,15 +9,15 @@ before_install:
   - travis_retry sudo apt-get update
   - travis_retry sudo apt-get install cabal-install-$CABALVER ghc-$GHCVER
   - export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/$CABALVER/bin:$PATH
-  - git clone https://github.com/fpco/inline-c.git;
-    cd inline-c;
-    cabal install;
-    cd ..;
 
 install:
   - cabal --version
   - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
   - travis_retry cabal update
+  - git clone https://github.com/fpco/inline-c.git;
+    cd inline-c;
+    cabal install;
+    cd ..;
   - cabal install --only-dependencies --enable-tests --enable-benchmarks
 
 script:
