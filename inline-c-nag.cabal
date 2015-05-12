@@ -1,6 +1,8 @@
 name:                inline-c-nag
 version:             0.1.0.0
-license:             AllRightsReserved
+synopsis:            Utilities to use inline-c with NAG.
+description:         See <https://github.com/fpco/inline-c#using-inline-c-with-nag>.
+license:             MIT
 license-file:        LICENSE
 author:              Francesco Mazzoli
 maintainer:          francesco@fpcomplete.com
@@ -8,6 +10,10 @@ copyright:           (c) 2015 FP Complete Corporation
 category:            Math
 build-type:          Simple
 cabal-version:       >=1.10
+
+source-repository head
+  type:     git
+  location: https://github.com/fpco/inline-c-nag
 
 flag examples
   description:         Build examples
@@ -24,8 +30,8 @@ library
   hs-source-dirs:      src
   default-language:    Haskell2010
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC
-  cc-options:          -O2 -m64
+  ghc-options:         -Wall -fPIC
+  cc-options:          -m64
 
 -- Examples
 
@@ -38,11 +44,11 @@ executable a02bac
                      , inline-c-nag
                      , raw-strings-qq
   default-language:    Haskell2010
-  cc-options:          -O2 -m64
+  cc-options:          -m64
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC
+  ghc-options:         -Wall -fPIC
 
   if flag(examples)
     buildable: True
@@ -59,11 +65,11 @@ executable c06puce
                      , inline-c-nag
                      , raw-strings-qq
   default-language:    Haskell2010
-  cc-options:          -O2 -m64 -w
+  cc-options:          -m64 -w
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC
+  ghc-options:         -Wall -fPIC
 
   if flag(examples)
     buildable: True
@@ -80,11 +86,11 @@ executable one-dim-fft
                      , inline-c-nag
                      , vector
   default-language:    Haskell2010
-  cc-options:          -O2 -m64
+  cc-options:          -m64
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC
+  ghc-options:         -Wall -fPIC
 
   if flag(examples)
     buildable: True
@@ -102,11 +108,11 @@ executable nelder-mead
                      , vector
                      , async
   default-language:    Haskell2010
-  cc-options:          -O2 -m64
+  cc-options:          -m64
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O2 -fPIC
+  ghc-options:         -Wall -fPIC
 
   if flag(examples)
     buildable: True
@@ -122,11 +128,11 @@ executable ode
                      , inline-c-nag
                      , vector
   default-language:    Haskell2010
-  cc-options:          -O2 -m64
+  cc-options:          -m64
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC -fno-warn-name-shadowing
+  ghc-options:         -Wall -fPIC -fno-warn-name-shadowing
 
   if flag(examples)
     buildable: True
@@ -144,11 +150,11 @@ executable ode-runge-kutta
                      , transformers-compat
                      , monad-control
   default-language:    Haskell2010
-  cc-options:          -O2 -m64
+  cc-options:          -m64
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC -fno-warn-name-shadowing
+  ghc-options:         -Wall -fPIC -fno-warn-name-shadowing
 
   if flag(examples)
     buildable: True
@@ -165,11 +171,11 @@ executable interpolation
                      , Chart
                      , Chart-cairo
   default-language:    Haskell2010
-  cc-options:          -O2 -m64
+  cc-options:          -m64
   extra-libraries:     nagc_nag imf svml irng intlc
   extra-lib-dirs:      /opt/NAG/cll6i24dcl/lib /opt/NAG/cll6i24dcl/rtl/intel64
   include-dirs:        /opt/NAG/cll6i24dcl/include
-  ghc-options:         -Wall -O -fPIC -fno-warn-name-shadowing
+  ghc-options:         -Wall -fPIC -fno-warn-name-shadowing
 
   if flag(examples)
     buildable: True
