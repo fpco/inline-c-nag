@@ -1,7 +1,7 @@
 name:                inline-c-nag
 version:             0.1.0.0
 synopsis:            Utilities to use inline-c with NAG.
-description:         See <https://github.com/fpco/inline-c#using-inline-c-with-nag>.
+description:         See <https://github.com/fpco/inline-c-nag/blob/master/README.md>
 license:             MIT
 license-file:        LICENSE
 author:              Francesco Mazzoli
