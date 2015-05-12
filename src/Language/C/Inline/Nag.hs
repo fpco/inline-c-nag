@@ -7,8 +7,6 @@ module Language.C.Inline.Nag
     -- * Types
   , Complex(..)
   , NagError
-  , _NAG_ERROR_BUF_LEN
-  , _NE_NOERROR
   , Nag_Boolean
   , Nag_Integer
   , Nag_Comm
@@ -36,6 +34,9 @@ context nagCtx
 
 include "<nag.h>"
 
+-- | Allocates a @'Ptr' 'NagError'@ which can be used with many of the
+-- NAG functions.  After the action has run, it inspects its contents
+-- and reports an error if present.
 withNagError :: (Ptr NagError -> IO a) -> IO (Either String a)
 withNagError f = initNagError $ \ptr -> checkNagError ptr $ f ptr
 

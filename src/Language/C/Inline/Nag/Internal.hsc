@@ -6,8 +6,6 @@ module Language.C.Inline.Nag.Internal
   ( -- * Types
     Complex(..)
   , NagError
-  , _NAG_ERROR_BUF_LEN
-  , _NE_NOERROR
   , Nag_Boolean
   , Nag_ErrorControl
   , Nag_Integer
@@ -57,12 +55,6 @@ instance Storable NagError where
     alignment _ = alignment (undefined :: Ptr ())
     peek = error "peek not implemented for NagError"
     poke _ _ = error "poke not implemented for NagError"
-
-_NE_NOERROR :: CInt
-_NE_NOERROR = (#const NE_NOERROR)
-
-_NAG_ERROR_BUF_LEN :: CInt
-_NAG_ERROR_BUF_LEN = (#const NAG_ERROR_BUF_LEN)
 
 data Nag_Comm
 instance Storable Nag_Comm where
