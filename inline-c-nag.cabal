@@ -23,7 +23,7 @@ library
   exposed-modules:     Language.C.Inline.Nag
   other-modules:       Language.C.Inline.Nag.Internal
   c-sources:           src/Language/C/Inline/Nag.c
-  build-depends:       base >=4 && <5
+  build-depends:       base >=4.7 && <5
                      , inline-c
                      , template-haskell
                      , containers
