@@ -30,7 +30,7 @@ parseData :: (Int64, Int64) -> IO (A.StorableArray (Int64, Int64) C.Complex)
 parseData (m0, n0) = do
   x <- A.newArray ((0, 0), (m0, n0)) $ C.Complex 0 0
   let (m, n) = (fi m0, fi n0)
-  A.withStorableArray x $ \xPtr -> [C.stmts| void(Complex *xPtr) {
+  A.withStorableArray x $ \xPtr -> [C.block| void(Complex *xPtr) {
       int i;
       for (i = 0; i < $(Integer m) * $(Integer n); i++)
         scanf(" ( %lf , %lf ) ", &xPtr[i].re, &xPtr[i].im);
@@ -43,7 +43,7 @@ printGenComplxMat str x = do
   ((0, 0), (m0, n0)) <- A.getBounds x
   let (m, n) = (fi m0, fi n0)
   withCString str $ \str -> A.withStorableArray x $ \xPtr ->
-    [C.stmts| int {
+    [C.block| int {
       NagError fail; INIT_FAIL(fail);
       nag_gen_complx_mat_print_comp(
         Nag_RowMajor, Nag_GeneralMatrix, Nag_NonUnitDiag, $(Integer n), $(Integer m),
@@ -57,7 +57,7 @@ sumFftComplex2d
 sumFftComplex2d flag x = do
   ((0, 0), (m0, n0)) <- A.getBounds x
   let (m, n) = (fi m0, fi n0)
-  A.withStorableArray x $ \xPtr -> [C.stmts| int {
+  A.withStorableArray x $ \xPtr -> [C.block| int {
     NagError fail; INIT_FAIL(fail);
     nag_sum_fft_complex_2d($(int flag), $(Integer m), $(Integer n), $(Complex *xPtr), &fail);
     return fail.code != NE_NOERROR;

@@ -76,7 +76,7 @@ solve (SolveOptions method tol hstart) f xs y0 = unsafePerformIO $ runExceptT $ 
   liftBaseOp C.initNagError $ \fail_ -> do
     -- Tail because the first point is the start
     ys <- forM (tail xs) $ \t -> do
-      ExceptT $ C.checkNagError fail_ $ [C.stmts| void {
+      ExceptT $ C.checkNagError fail_ $ [C.block| void {
           double tgot;
           nag_ode_ivp_rkts_range(
             $fun:(void (*fIO)(double t, Integer n, const double y[], double yp[], Nag_Comm *comm)),

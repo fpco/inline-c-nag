@@ -132,7 +132,7 @@ nelderMead xImm pureFunct maxcal = do
     x <- V.thaw xImm
     -- Call the C code
     C.withNagError $ \fail_ -> do
-      minCost <- [C.stmts| double {
+      minCost <- [C.block| double {
           // The function takes an exit parameter to store the minimum
           // cost.
           double f;

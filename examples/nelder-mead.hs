@@ -36,7 +36,7 @@ nelderMead xImm pureFunct maxcal = unsafePerformIO $ do
     x <- V.thaw xImm
     -- Call the C code
     C.withNagError $ \fail_ -> do
-      minCost <- [C.stmts| double {
+      minCost <- [C.block| double {
           // The function takes an exit parameter to store the minimum
           // cost.
           double f;
@@ -78,7 +78,7 @@ oneVar
 oneVar (a, b) fun max_fun = unsafePerformIO $ do
     let funct xc fc _comm = poke fc $ fun xc
     C.withNagError $ \fail_ -> C.withPtrs_ $ \(x, f) -> do
-      [C.stmts| void {
+      [C.block| void {
         double a = $(double a), b = $(double b);
         nag_opt_one_var_no_deriv(
           $fun:(void (*funct)(double, double*, Nag_Comm*)),

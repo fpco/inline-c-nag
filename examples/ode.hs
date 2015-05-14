@@ -112,7 +112,7 @@ solveIO Options{..} fcn mbJac (x, xend) mbOutput y = do
   xendRef <- newIORef x
   yMut <- V.thaw y
   res <- C.withNagError $ \fail_ -> do
-    xend' <- [C.stmts| double {
+    xend' <- [C.block| double {
         double x = $(double x);
         Nag_User comm;
         nag_ode_ivp_bdf_gen(

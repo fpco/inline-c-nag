@@ -11,7 +11,7 @@ C.include "<naga02.h>"
 
 -- Code dump test
 
-C.literal [r|
+C.verbatim [r|
 int test_emitCode(void)
 {
   Integer     exit_status = 0;
