@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE QuasiQuotes #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
-import qualified Language.C.Inline.Nag as C
+import qualified Language.C.Inline as C
 import           Text.RawString.QQ (r)
 
 C.include "<nag.h>"
@@ -180,5 +180,5 @@ int test_emitCode(void)
 
 main :: IO ()
 main = do
-  [C.exp| void{ test_emitCode() } |]
+  [C.exp| void{ test_emitCode(); } |]
 
